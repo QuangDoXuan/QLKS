@@ -1,0 +1,17 @@
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\Entities.dll.config
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\Entities.dll
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\Entities.pdb
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\EntityFramework.dll
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\EntityFramework.SqlServer.dll
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\EntityFramework.xml
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\EntityFramework.SqlServer.xml
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\obj\Debug\Entities.csproj.CopyComplete
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\obj\Debug\Entities.dll
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\obj\Debug\Entities.pdb
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\obj\Debug\Entities.csprojAssemblyReference.cache
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.InitialCreate.resources
+D:\QuanLyKhachSan\QuanLyKhachSan\Entities\obj\Debug\Entities.csproj.GenerateResource.cache
