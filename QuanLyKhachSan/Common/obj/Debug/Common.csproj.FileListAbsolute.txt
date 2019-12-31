@@ -3,3 +3,8 @@ D:\QuanLyKhachSan\QuanLyKhachSan\Common\bin\Debug\Common.pdb
 D:\QuanLyKhachSan\QuanLyKhachSan\Common\obj\Debug\Common.dll
 D:\QuanLyKhachSan\QuanLyKhachSan\Common\obj\Debug\Common.pdb
 D:\QuanLyKhachSan\QuanLyKhachSan\Common\obj\Debug\Common.csprojAssemblyReference.cache
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Common\bin\Debug\Common.dll
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Common\bin\Debug\Common.pdb
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Common\obj\Debug\Common.csprojAssemblyReference.cache
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Common\obj\Debug\Common.dll
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Common\obj\Debug\Common.pdb

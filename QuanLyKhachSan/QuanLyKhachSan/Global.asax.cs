@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using QuanLyKhachSan.AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +20,13 @@ namespace QuanLyKhachSan
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Config AutoMapper
+            var mapperConfig = new MapperConfiguration(cfg => {
+                cfg.AddProfile<MappingConfig>();
+            });
+
+            var mapper = mapperConfig.CreateMapper();
         }
     }
 }

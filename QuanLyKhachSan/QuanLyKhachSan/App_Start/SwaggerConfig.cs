@@ -33,6 +33,8 @@ namespace QuanLyKhachSan
                         // additional fields by chaining methods off SingleApiVersion.
                         //
                         c.SingleApiVersion("v1", "QuanLyKhachSan");
+                        c.IncludeXmlComments(string.Format(@"{0}\bin\QuanLyKhachSan.XML",
+                                      System.AppDomain.CurrentDomain.BaseDirectory));
 
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //
@@ -61,7 +63,7 @@ namespace QuanLyKhachSan
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                         //c.ApiKey("apiKey")
                         //    .Description("API Key Authentication")
                         //    .Name("apiKey")

@@ -1,21 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entities
+namespace Entities.Repository
 {
-    public class Employee
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Employee")]
+    public partial class Employee
     {
-        [Key]
-        public Guid EmployeeId { get; set; }
-        public string EmployeeName { get; set; }
-        public DateTime Dob { get; set; }
-        public int Gentle { get; set; }
-        public float CoefficientSalary { get; set; }
-        //public Guid DepartmentId { get; set; }
-        //public Department Departments { get; set; }   
+        public Guid EmployeeID { get; set; }
+
+        [StringLength(10)]
+        public string EmployeeNo { get; set; }
+
+        [StringLength(100)]
+        public string Name { get; set; }
+
+        public bool? Gender { get; set; }
+
+        public string Address { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? Birthday { get; set; }
+
+        [StringLength(11)]
+        public string Phone { get; set; }
+
+        [StringLength(12)]
+        public string IdentityCard { get; set; }
+
+        [StringLength(100)]
+        public string Email { get; set; }
+
+        [StringLength(100)]
+        public string Position { get; set; }
     }
 }

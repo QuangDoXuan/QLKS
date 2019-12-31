@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Entities.Repository;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -27,6 +28,13 @@ namespace Entities
         {
             return new HotelManageDbContext();
         }
+        public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Device> Devices { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Equipment> Equipments { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<BookRoom> BookRooms { get; set; }
+        public virtual DbSet<TypeRoom> TypeRooms { get; set; }
     }
 }

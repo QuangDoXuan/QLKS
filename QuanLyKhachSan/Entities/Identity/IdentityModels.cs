@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,5 +15,6 @@ namespace Entities
             // Add custom user claims here
             return userIdentity;
         }
+        public DateTime? CreateDate { get; set; }
     }
 }

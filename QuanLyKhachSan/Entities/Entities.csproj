@@ -46,6 +46,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,21 +58,37 @@
   <ItemGroup>
     <Compile Include="DbContext\HotelManageDbContext.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
-    <Compile Include="Migrations\201912151642071_InitialCreate.cs" />
-    <Compile Include="Migrations\201912151642071_InitialCreate.Designer.cs">
-      <DependentUpon>201912151642071_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201912300040515_update-db.cs" />
+    <Compile Include="Migrations\201912300040515_update-db.Designer.cs">
+      <DependentUpon>201912300040515_update-db.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912300947380_update-table-user.cs" />
+    <Compile Include="Migrations\201912300947380_update-table-user.Designer.cs">
+      <DependentUpon>201912300947380_update-table-user.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BookRoom.cs" />
+    <Compile Include="Repository\Customer.cs" />
+    <Compile Include="Repository\Device.cs" />
     <Compile Include="Repository\Employee.cs" />
+    <Compile Include="Repository\Equipment.cs" />
+    <Compile Include="Repository\Payment.cs" />
+    <Compile Include="Repository\Room.cs" />
+    <Compile Include="Repository\TypeRoom.cs" />
+    <Compile Include="ViewModel\RoleCreateViewModel.cs" />
+    <Compile Include="ViewModel\UserCreateViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912151642071_InitialCreate.resx">
-      <DependentUpon>201912151642071_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912300040515_update-db.resx">
+      <DependentUpon>201912300040515_update-db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912300947380_update-table-user.resx">
+      <DependentUpon>201912300947380_update-table-user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
