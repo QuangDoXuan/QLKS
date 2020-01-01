@@ -145,7 +145,7 @@ namespace BL
             return usersWithRoles;
         }
 
-        public UserWithRoleViewModel SearchByName(string name)
+        public IEnumerable<UserWithRoleViewModel> SearchByName(string name)
         {
 
             var usersWithRoles = (from user in db.Users where user.UserName.Contains(name)
