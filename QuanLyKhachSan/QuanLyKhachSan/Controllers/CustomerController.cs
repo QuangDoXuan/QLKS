@@ -1,4 +1,5 @@
-﻿using BL;
+﻿using AutoMapper;
+using BL;
 using Common;
 using Entities;
 using System;
@@ -6,30 +7,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace QuanLyKhachSan.Controllers
 {
-    public class RoomTypeController : ApiController
+    public class CustomerController : ApiController
     {
-        private RoomTypeBL typeRoomBL = new RoomTypeBL();
+        private CustomerBL customerBL = new CustomerBL();
+        private readonly IMapper _mapper;
 
+        public CustomerController()
+        {
+
+        }
+
+        public CustomerController(CustomerBL customerBL, IMapper mapper)
+        {
+            this.customerBL = customerBL;
+            this._mapper = mapper;
+        }
         /// <summary>
-        /// Danh sách loại phòng
+        /// Danh sách Customer
         /// </summary>
         /// <returns></returns>
-        [Route("api/RoomType/all")]
-        //[Authorize(TypeRooms = "Moderator")]
+        [Route("api/Customer/all")]
+        //[Authorize(Customers = "Moderator")]
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            HttpResponseDTO<IEnumerable<TypeRoom>> response = new HttpResponseDTO<IEnumerable<TypeRoom>>();
+            HttpResponseDTO<IEnumerable<Customer>> response = new HttpResponseDTO<IEnumerable<Customer>>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.GetAll();
+                response.data = customerBL.GetAll();
             }
             catch (Exception e)
             {
@@ -44,18 +55,17 @@ namespace QuanLyKhachSan.Controllers
         /// Phân trang
         /// </summary>
         /// <returns></returns>
-        [Route("api/RoomType/page")]
-        //[Authorize(Rooms = "Moderator")]
+        [Route("api/Customer/page")]
+        //[Authorize(Customers = "Moderator")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetByPage(int pageNumber, int pageSize)
+        public IHttpActionResult GetByPage(int pageNumber, int pageSize)
         {
-            HttpResponseDTO<PagedResults<TypeRoom>> response = new HttpResponseDTO<PagedResults<TypeRoom>>();
-            await Task.Delay(500);
+            HttpResponseDTO<PagedResults<Customer>> response = new HttpResponseDTO<PagedResults<Customer>>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.CreatePagedResults(pageNumber, pageSize);
+                response.data = customerBL.CreatePagedResults(pageNumber, pageSize);
             }
             catch (Exception e)
             {
@@ -67,21 +77,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
 
-
         /// <summary>
-        /// Chi tiết Room
+        /// Chi tiết Customer
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("api/RoomType/detail")]
+        [Route("api/Customer/detail")]
         public IHttpActionResult GetDetail([FromUri]Guid id)
         {
-            HttpResponseDTO<TypeRoom> response = new HttpResponseDTO<TypeRoom>();
+            HttpResponseDTO<Customer> response = new HttpResponseDTO<Customer>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.GetDetail(id);
+                response.data = customerBL.GetDetail(id);
             }
             catch (Exception e)
             {
@@ -93,20 +102,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Tạo mới loại phòng
+        /// 
         /// </summary>
-        /// <param name="typeRoom">object</param>
+        /// <param name="Customer">      
         /// <returns></returns>
         [HttpPost]
-        [Route("api/RoomType/create")]
-        public IHttpActionResult CreateRoom([FromBody]TypeRoom typeRoom)
+        [Route("api/Customer/create")]
+        public IHttpActionResult CreateCustomer([FromBody]Customer customer)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Create(typeRoom);
+                response.data = customerBL.Create(customer);
             }
             catch (Exception e)
             {
@@ -118,20 +127,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Xóa loại phòng
+        /// Xóa Customer
         /// </summary>
-        /// <param name="id">TypeRoomID</param>
+        /// <param name="id">CustomerID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("api/RoomType/delete")]
-        public IHttpActionResult DeleteRoom([FromUri]Guid id)
+        [Route("api/Customer/delete")]
+        public IHttpActionResult DeleteCustomer([FromUri]Guid id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Delete(id);
+                response.data = customerBL.Delete(id);
             }
             catch (Exception e)
             {
@@ -143,20 +152,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Xóa nhiều loại phòng
+        /// Xóa nhiều Customer
         /// </summary>
-        /// <param name="id">List TypeRoomId</param>
+        /// <param name="id">List CustomerID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("api/RoomType/deletes")]
-        public IHttpActionResult DeleteTypeRooms([FromBody]Guid[] id)
+        [Route("api/Customer/deletes")]
+        public IHttpActionResult DeleteCustomers([FromBody]Guid[] id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Deletes(id);
+                response.data = customerBL.Deletes(id);
             }
             catch (Exception e)
             {
@@ -166,5 +175,6 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
+
     }
 }

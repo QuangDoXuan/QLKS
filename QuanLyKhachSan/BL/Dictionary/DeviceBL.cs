@@ -8,47 +8,52 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class RoomTypeBL:IRoomTypeRepository<TypeRoom>
+    public class DeviceBL
     {
+
         private HotelManageDbContext db = new HotelManageDbContext();
-        public IEnumerable<TypeRoom> GetAll()
+
+        //private readonly DbSet<T> _dbSet;
+        public IEnumerable<Device> GetAll()
         {
-            return db.TypeRooms.ToList();
+            return db.Devices.ToList();
         }
-        public TypeRoom GetDetail(Guid id)
+        public Device GetDetail(Guid id)
         {
-            return db.TypeRooms.FirstOrDefault(x => x.TypeRoomID == id);
+            return db.Devices.FirstOrDefault(x => x.DeviceID == id);
         }
-        public int Create(TypeRoom roomType)
+        public int Create(Device device)
         {
-            if (roomType != null)
+
+            if (device != null)
             {
-                roomType.TypeRoomID = Guid.NewGuid();
-                db.TypeRooms.Add(roomType);
+                device.DeviceID = Guid.NewGuid();
+                db.Devices.Add(device);
                 db.SaveChanges();
                 return 1;
             }
             return 0;
         }
-        public int Update(Guid id, TypeRoom room)
+
+        public int Update(Guid id, Device device)
         {
-            var newRoom = db.TypeRooms.FirstOrDefault(x => x.TypeRoomID == id);
-            if (room != null && newRoom != null)
+            var newDevice = db.Devices.FirstOrDefault(x => x.DeviceID == id);
+            if (device != null && newDevice != null)
             {
-                newRoom.TypeRoomName = room.TypeRoomName;
-                newRoom.BasicPrice = room.BasicPrice;
-                newRoom.TypeRoomNo = room.TypeRoomNo;
+                newDevice.DeviceName = device.DeviceName;
+                newDevice.DeviceNo = device.DeviceNo;
                 db.SaveChanges();
                 return 1;
             }
             return 0;
         }
+
         public int Delete(Guid id)
         {
             if (id != null)
             {
-                var roomDeleted = db.TypeRooms.FirstOrDefault(x => x.TypeRoomID == id);
-                db.TypeRooms.Remove(roomDeleted);
+                var device = db.Devices.FirstOrDefault(x => x.DeviceID == id);
+                db.Devices.Remove(device);
                 db.SaveChanges();
                 return 1;
             }
@@ -61,8 +66,8 @@ namespace BL
             {
                 foreach (var item in id)
                 {
-                    var roomDeleted = db.TypeRooms.FirstOrDefault(x => x.TypeRoomID == item);
-                    db.TypeRooms.Remove(roomDeleted);
+                    var device = db.Devices.FirstOrDefault(x => x.DeviceID == item);
+                    db.Devices.Remove(device);
                 }
                 db.SaveChanges();
                 return 1;
@@ -70,13 +75,13 @@ namespace BL
             return 0;
         }
 
-        public PagedResults<TypeRoom> CreatePagedResults(int pageNumber, int pageSize)
+        public PagedResults<Device> CreatePagedResults(int pageNumber, int pageSize)
         {
             var skipAmount = pageSize * pageNumber;
 
-            var list = db.TypeRooms.OrderBy(t => t.TypeRoomID).Skip(skipAmount).Take(pageSize);
+            var list = db.Devices.OrderBy(t => t.DeviceID).Skip(skipAmount).Take(pageSize);
 
-            var totalNumberOfRecords = db.TypeRooms.ToList().Count();
+            var totalNumberOfRecords = db.Devices.ToList().Count();
 
             var results = list.ToList();
 
@@ -84,7 +89,7 @@ namespace BL
 
             var totalPageCount = (totalNumberOfRecords / pageSize) + (mod == 0 ? 0 : 1);
 
-            return new PagedResults<TypeRoom>
+            return new PagedResults<Device>
             {
                 Results = results,
                 PageNumber = pageNumber,

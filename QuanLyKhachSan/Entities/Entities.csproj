@@ -66,9 +66,18 @@
     <Compile Include="Migrations\201912300947380_update-table-user.Designer.cs">
       <DependentUpon>201912300947380_update-table-user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001010614011_change_book_room.cs" />
+    <Compile Include="Migrations\202001010614011_change_book_room.Designer.cs">
+      <DependentUpon>202001010614011_change_book_room.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001010622148_update_booking.cs" />
+    <Compile Include="Migrations\202001010622148_update_booking.Designer.cs">
+      <DependentUpon>202001010622148_update_booking.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BookRoom.cs" />
+    <Compile Include="Repository\BookRoomDetail.cs" />
     <Compile Include="Repository\Customer.cs" />
     <Compile Include="Repository\Device.cs" />
     <Compile Include="Repository\Employee.cs" />
@@ -76,6 +85,7 @@
     <Compile Include="Repository\Payment.cs" />
     <Compile Include="Repository\Room.cs" />
     <Compile Include="Repository\TypeRoom.cs" />
+    <Compile Include="ViewModel\BookRoomCreateViewModel.cs" />
     <Compile Include="ViewModel\RoomCreateViewModel.cs" />
     <Compile Include="ViewModel\RoomTypeCreateViewModel.cs" />
     <Compile Include="ViewModel\UserWithRoleViewModel.cs" />
@@ -92,6 +102,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912300947380_update-table-user.resx">
       <DependentUpon>201912300947380_update-table-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001010614011_change_book_room.resx">
+      <DependentUpon>202001010614011_change_book_room.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001010622148_update_booking.resx">
+      <DependentUpon>202001010622148_update_booking.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,5 @@
-﻿using BL;
+﻿using AutoMapper;
+using BL;
 using Common;
 using Entities;
 using System;
@@ -6,30 +7,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace QuanLyKhachSan.Controllers
 {
-    public class RoomTypeController : ApiController
+    public class DeviceController : ApiController
     {
-        private RoomTypeBL typeRoomBL = new RoomTypeBL();
+        private DeviceBL deviceBL = new DeviceBL();
+        private readonly IMapper _mapper;
 
+        public DeviceController()
+        {
+
+        }
+
+        public DeviceController(DeviceBL deviceBL, IMapper mapper)
+        {
+            this.deviceBL = deviceBL;
+            this._mapper = mapper;
+        }
         /// <summary>
-        /// Danh sách loại phòng
+        /// Danh sách Device
         /// </summary>
         /// <returns></returns>
-        [Route("api/RoomType/all")]
-        //[Authorize(TypeRooms = "Moderator")]
+        [Route("api/Device/all")]
+        //[Authorize(Devices = "Moderator")]
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            HttpResponseDTO<IEnumerable<TypeRoom>> response = new HttpResponseDTO<IEnumerable<TypeRoom>>();
+            HttpResponseDTO<IEnumerable<Device>> response = new HttpResponseDTO<IEnumerable<Device>>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.GetAll();
+                response.data = deviceBL.GetAll();
             }
             catch (Exception e)
             {
@@ -44,18 +55,17 @@ namespace QuanLyKhachSan.Controllers
         /// Phân trang
         /// </summary>
         /// <returns></returns>
-        [Route("api/RoomType/page")]
-        //[Authorize(Rooms = "Moderator")]
+        [Route("api/Device/page")]
+        //[Authorize(Devices = "Moderator")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetByPage(int pageNumber, int pageSize)
+        public IHttpActionResult GetByPage(int pageNumber, int pageSize)
         {
-            HttpResponseDTO<PagedResults<TypeRoom>> response = new HttpResponseDTO<PagedResults<TypeRoom>>();
-            await Task.Delay(500);
+            HttpResponseDTO<PagedResults<Device>> response = new HttpResponseDTO<PagedResults<Device>>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.CreatePagedResults(pageNumber, pageSize);
+                response.data = deviceBL.CreatePagedResults(pageNumber, pageSize);
             }
             catch (Exception e)
             {
@@ -67,21 +77,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
 
-
         /// <summary>
-        /// Chi tiết Room
+        /// Chi tiết Device
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("api/RoomType/detail")]
+        [Route("api/Device/detail")]
         public IHttpActionResult GetDetail([FromUri]Guid id)
         {
-            HttpResponseDTO<TypeRoom> response = new HttpResponseDTO<TypeRoom>();
+            HttpResponseDTO<Device> response = new HttpResponseDTO<Device>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.GetDetail(id);
+                response.data = deviceBL.GetDetail(id);
             }
             catch (Exception e)
             {
@@ -93,20 +102,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Tạo mới loại phòng
+        /// 
         /// </summary>
-        /// <param name="typeRoom">object</param>
+        /// <param name="Device">      
         /// <returns></returns>
         [HttpPost]
-        [Route("api/RoomType/create")]
-        public IHttpActionResult CreateRoom([FromBody]TypeRoom typeRoom)
+        [Route("api/Device/create")]
+        public IHttpActionResult CreateDevice([FromBody]Device Device)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Create(typeRoom);
+                response.data = deviceBL.Create(Device);
             }
             catch (Exception e)
             {
@@ -118,20 +127,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Xóa loại phòng
+        /// Xóa Device
         /// </summary>
-        /// <param name="id">TypeRoomID</param>
+        /// <param name="id">DeviceID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("api/RoomType/delete")]
-        public IHttpActionResult DeleteRoom([FromUri]Guid id)
+        [Route("api/Device/delete")]
+        public IHttpActionResult DeleteDevice([FromUri]Guid id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Delete(id);
+                response.data = deviceBL.Delete(id);
             }
             catch (Exception e)
             {
@@ -143,20 +152,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Xóa nhiều loại phòng
+        /// Xóa nhiều Device
         /// </summary>
-        /// <param name="id">List TypeRoomId</param>
+        /// <param name="id">List DeviceID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("api/RoomType/deletes")]
-        public IHttpActionResult DeleteTypeRooms([FromBody]Guid[] id)
+        [Route("api/Device/deletes")]
+        public IHttpActionResult DeleteDevices([FromBody]Guid[] id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Deletes(id);
+                response.data = deviceBL.Deletes(id);
             }
             catch (Exception e)
             {
@@ -166,5 +175,6 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
+
     }
 }

@@ -92,11 +92,13 @@ namespace QuanLyKhachSan.Controllers
         [Route("api/User/page")]
         //[Authorize(Rooms = "Moderator")]
         [HttpGet]
-        public IHttpActionResult GetByPage(int pageNumber, int pageSize)
+        public async Task<IHttpActionResult> GetByPage(int pageNumber, int pageSize)
         {
             HttpResponseDTO<PagedResults<UserWithRoleViewModel>> response = new HttpResponseDTO<PagedResults<UserWithRoleViewModel>>();
+            await Task.Delay(500);
             try
             {
+             
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
                 response.data = userBL.CreatePagedResults(pageNumber, pageSize);
@@ -351,7 +353,7 @@ namespace QuanLyKhachSan.Controllers
         [Route("api/User/delete-users")]
         //[Authorize(Roles = "Admin")]
         [HttpDelete]
-        public IHttpActionResult DeleteUsers([FromUri]Guid[] id)
+        public IHttpActionResult DeleteUsers([FromBody]Guid[] id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try

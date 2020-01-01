@@ -1,4 +1,5 @@
 ﻿using BL;
+using Common;
 using Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -17,6 +18,32 @@ namespace BL
         {
             return db.Roles.ToList();
         }
+
+
+        public PagedResults<IdentityRole> CreatePagedResults(int pageNumber, int pageSize)
+        {
+            var skipAmount = pageSize * pageNumber;
+
+            var list = db.Roles.OrderBy(t => t.Id).Skip(skipAmount).Take(pageSize);
+
+            var totalNumberOfRecords = db.Roles.ToList().Count();
+
+            var results = list.ToList();
+
+            var mod = totalNumberOfRecords % pageSize;
+
+            var totalPageCount = (totalNumberOfRecords / pageSize) + (mod == 0 ? 0 : 1);
+
+            return new PagedResults<IdentityRole>
+            {
+                Results = results,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalNumberOfPages = totalPageCount,
+                TotalNumberOfRecords = totalNumberOfRecords
+            };
+        }
+
         public IdentityRole GetDetail(Guid id)
         {
             return db.Roles.FirstOrDefault(x => x.Id == id.ToString());

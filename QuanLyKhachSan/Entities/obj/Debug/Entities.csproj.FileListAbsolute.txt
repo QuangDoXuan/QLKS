@@ -33,3 +33,5 @@ D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.upd
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.csproj.GenerateResource.cache
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.csprojAssemblyReference.cache
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.updatetableuser.resources
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.change_book_room.resources
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.update_booking.resources

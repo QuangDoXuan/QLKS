@@ -24,8 +24,10 @@ namespace BL
         }
         public int CreateRoom(Room room)
         {
+            
             if (room != null)
             {
+                room.RoomID = Guid.NewGuid();
                 db.Rooms.Add(room);
                 db.SaveChanges();
                 return 1;
@@ -84,7 +86,7 @@ namespace BL
 
             var list = db.Rooms.OrderBy(t => t.RoomID).Skip(skipAmount).Take(pageSize);
 
-            var totalNumberOfRecords = list.Count();
+            var totalNumberOfRecords = db.Rooms.ToList().Count();
 
             var results = list.ToList();
 

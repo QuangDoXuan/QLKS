@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -44,6 +45,33 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
+
+        /// <summary>
+        /// Danh sách role
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Role/page")]
+        //[Authorize(Roles = "Moderator")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetByPage(int pageNumber, int pageSize)
+        {
+            HttpResponseDTO<IEnumerable<IdentityRole>> response = new HttpResponseDTO<IEnumerable<IdentityRole>>();
+            await Task.Delay(500);
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = roleBL.GetAll();
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = null;
+            }
+            return Ok(response);
+        }
+
 
 
         /// <summary>

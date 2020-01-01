@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.ViewModel
+namespace Entities
 {
     public class RoomCreateViewModel
     {
-        public Guid RoomID { get; set; }
+        public RoomCreateViewModel()
+        {
+
+        }
         [StringLength(10)]
         public string RoomNo { get; set; }
 
@@ -22,12 +25,6 @@ namespace Entities.ViewModel
         public decimal? Price { get; set; }
 
         public int? Floor { get; set; }
-
-        [StringLength(50)]
-        public string StatusStay { get; set; }
-
-        [StringLength(50)]
-        public string Status { get; set; }
 
         public Guid? TypeRoomID { get; set; }
     }

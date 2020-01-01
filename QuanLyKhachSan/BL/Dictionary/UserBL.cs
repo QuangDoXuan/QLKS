@@ -86,6 +86,7 @@ namespace BL
                     var user = db.Users.FirstOrDefault(x => x.Id == item.ToString());
                     db.Users.Remove(user);
                 }
+                db.SaveChanges();
                 return 1;
             }
             return 0;
@@ -175,9 +176,35 @@ namespace BL
                                       EmailConfirmed = p.EmailConfirmed
                                   }).Skip(skipAmount).Take(pageSize);
 
-            var totalNumberOfRecords = list.Count();
+           
 
             var results = list.ToList();
+
+            var listAll = (from user in db.Users
+                           select new
+                           {
+                               UserId = user.Id,
+                               Username = user.UserName,
+                               Email = user.Email,
+                               RoleNames = (from userRole in user.Roles
+                                            join role in db.Roles on userRole.RoleId
+                                            equals role.Id
+                                            select role).ToList(),
+                               CreateDate = user.CreateDate,
+                               EmailConfirmed = user.EmailConfirmed
+
+                           }).ToList().Select(p => new UserWithRoleViewModel()
+
+                           {
+                               UserId = p.UserId,
+                               UserName = p.Username,
+                               Email = p.Email,
+                               //Role = string.Join(",", p.RoleNames),
+                               Roles = p.RoleNames,
+                               CreateDate = p.CreateDate,
+                               EmailConfirmed = p.EmailConfirmed
+                           });
+            var totalNumberOfRecords = listAll.Count();
 
             var mod = totalNumberOfRecords % pageSize;
 

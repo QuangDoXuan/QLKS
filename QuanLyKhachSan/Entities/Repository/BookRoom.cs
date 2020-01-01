@@ -26,12 +26,13 @@ namespace Entities
         public bool? IsCancel { get; set; }
 
         public decimal? Deposit { get; set; }
-
+        public bool ? Status { get; set; }
         public Guid? CustomerID { get; set; }
 
-        public Guid? RoomID { get; set; }
+        //public Guid? RoomID { get; set; }
 
-        public virtual Room Room { get; set; }
+        //public virtual Room Room { get; set; }
+        //public virtual ICollection<Room> ListRooms { get; set; }
 
         public virtual ICollection<Payment> Payments { get; set; }
     }

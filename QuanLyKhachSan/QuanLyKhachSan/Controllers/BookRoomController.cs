@@ -6,30 +6,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace QuanLyKhachSan.Controllers
 {
-    public class RoomTypeController : ApiController
+    /// <summary>
+    /// BookRoomController
+    /// </summary>
+    public class BookRoomController : ApiController
     {
-        private RoomTypeBL typeRoomBL = new RoomTypeBL();
+        private BookRoomBL bookRoomBL = new BookRoomBL();
 
         /// <summary>
-        /// Danh sách loại phòng
+        /// Danh sách Room
         /// </summary>
         /// <returns></returns>
-        [Route("api/RoomType/all")]
-        //[Authorize(TypeRooms = "Moderator")]
+        [Route("api/BookRoom/all")]
+        //[Authorize(Rooms = "Moderator")]
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            HttpResponseDTO<IEnumerable<TypeRoom>> response = new HttpResponseDTO<IEnumerable<TypeRoom>>();
+            HttpResponseDTO<IEnumerable<BookRoom>> response = new HttpResponseDTO<IEnumerable<BookRoom>>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.GetAll();
+                response.data = bookRoomBL.GetAll();
             }
             catch (Exception e)
             {
@@ -44,18 +46,17 @@ namespace QuanLyKhachSan.Controllers
         /// Phân trang
         /// </summary>
         /// <returns></returns>
-        [Route("api/RoomType/page")]
+        [Route("api/BookRoom/page")]
         //[Authorize(Rooms = "Moderator")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetByPage(int pageNumber, int pageSize)
+        public IHttpActionResult GetByPage(int pageNumber, int pageSize)
         {
-            HttpResponseDTO<PagedResults<TypeRoom>> response = new HttpResponseDTO<PagedResults<TypeRoom>>();
-            await Task.Delay(500);
+            HttpResponseDTO<PagedResults<BookRoom>> response = new HttpResponseDTO<PagedResults<BookRoom>>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.CreatePagedResults(pageNumber, pageSize);
+                response.data = bookRoomBL.CreatePagedResults(pageNumber, pageSize);
             }
             catch (Exception e)
             {
@@ -67,21 +68,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
 
-
         /// <summary>
-        /// Chi tiết Room
+        /// Chi tiết book
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("api/RoomType/detail")]
+        [Route("api/BookRoom/detail")]
         public IHttpActionResult GetDetail([FromUri]Guid id)
         {
-            HttpResponseDTO<TypeRoom> response = new HttpResponseDTO<TypeRoom>();
+            HttpResponseDTO<BookRoom> response = new HttpResponseDTO<BookRoom>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.GetDetail(id);
+                response.data = bookRoomBL.GetDetail(id);
             }
             catch (Exception e)
             {
@@ -92,21 +92,42 @@ namespace QuanLyKhachSan.Controllers
             return Ok(response);
         }
 
-        /// <summary>
-        /// Tạo mới loại phòng
-        /// </summary>
-        /// <param name="typeRoom">object</param>
-        /// <returns></returns>
+       /// <summary>
+       /// Tạo mới đặt phòng
+       /// </summary>
+       /// <param name="bookRoom"></param>
+       /// <param name="roomID"></param>
+       /// <returns></returns>
         [HttpPost]
-        [Route("api/RoomType/create")]
-        public IHttpActionResult CreateRoom([FromBody]TypeRoom typeRoom)
+        [Route("api/BookRoom/create")]
+        public IHttpActionResult Create([FromBody]BookRoom bookRoom)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Create(typeRoom);
+                response.data = bookRoomBL.Create(bookRoom);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = 0;
+            }
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("api/BookRoom/create-detail")]
+        public IHttpActionResult CreateDetail(Guid id,[FromBody]Guid[]roomID)
+        {
+            HttpResponseDTO<int> response = new HttpResponseDTO<int>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = bookRoomBL.CreateDetail(id,roomID);
             }
             catch (Exception e)
             {
@@ -118,20 +139,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Xóa loại phòng
+        /// Xóa đặt phòng
         /// </summary>
-        /// <param name="id">TypeRoomID</param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("api/RoomType/delete")]
-        public IHttpActionResult DeleteRoom([FromUri]Guid id)
+        [Route("api/BookRoom/delete")]
+        public IHttpActionResult Delete([FromUri]Guid id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Delete(id);
+                response.data = bookRoomBL.Delete(id);
             }
             catch (Exception e)
             {
@@ -143,20 +164,20 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Xóa nhiều loại phòng
+        /// Xóa nhiều đặt phòng
         /// </summary>
-        /// <param name="id">List TypeRoomId</param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("api/RoomType/deletes")]
-        public IHttpActionResult DeleteTypeRooms([FromBody]Guid[] id)
+        [Route("api/BookRoom/deletes")]
+        public IHttpActionResult Deletes([FromBody]Guid[] id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = typeRoomBL.Deletes(id);
+                response.data = bookRoomBL.Deletes(id);
             }
             catch (Exception e)
             {

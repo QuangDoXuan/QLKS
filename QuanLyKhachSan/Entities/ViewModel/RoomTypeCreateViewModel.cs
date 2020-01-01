@@ -5,10 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.ViewModel
+namespace Entities
 {
     public class RoomTypeCreateViewModel
     {
+        public RoomTypeCreateViewModel()
+        {
+
+        }
         [StringLength(10)]
         public string TypeRoomNo { get; set; }
 

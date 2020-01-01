@@ -22,6 +22,8 @@ namespace QuanLyKhachSan.AutoMapper
             CreateMap<UserCreateViewModel, ApplicationUser>();
             CreateMap<UserCreateViewModel, IdentityUser>();
             CreateMap<RoleCreateViewModel, IdentityRole>();
+            CreateMap<RoomCreateViewModel, Room>();
+            CreateMap<RoomTypeCreateViewModel, TypeRoom>();
         }
 
         private void CreateMappingFromEntitiesToViewModels()

@@ -36,5 +36,6 @@ namespace Entities
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<BookRoom> BookRooms { get; set; }
         public virtual DbSet<TypeRoom> TypeRooms { get; set; }
+        public virtual DbSet<BookRoomDetail> BookRoomDetails { get; set; }
     }
 }

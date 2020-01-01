@@ -1,4 +1,5 @@
-﻿using BL;
+﻿using AutoMapper;
+using BL;
 using Common;
 using Entities;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace QuanLyKhachSan.Controllers
@@ -16,7 +18,18 @@ namespace QuanLyKhachSan.Controllers
     public class RoomController : ApiController
     {
         private RoomBL roomBL = new RoomBL();
+        private readonly IMapper _mapper;
 
+        public RoomController()
+        {
+            
+        }
+
+        public RoomController(RoomBL roomBL, IMapper mapper)
+        {
+            this.roomBL = roomBL;
+            this._mapper = mapper;
+        }
         /// <summary>
         /// Danh sách Room
         /// </summary>
@@ -49,9 +62,10 @@ namespace QuanLyKhachSan.Controllers
         [Route("api/Room/page")]
         //[Authorize(Rooms = "Moderator")]
         [HttpGet]
-        public IHttpActionResult GetByPage(int pageNumber, int pageSize)
+        public async Task<IHttpActionResult> GetByPage(int pageNumber, int pageSize)
         {
             HttpResponseDTO<PagedResults<Room>> response = new HttpResponseDTO<PagedResults<Room>>();
+            await Task.Delay(500);
             try
             {
                 response.code = 0;
@@ -93,20 +107,28 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
-        /// Tạo mới Room
+        /// 
         /// </summary>
-        /// <param name="Room"></param>
+        /// <param name="room">      
+        /// /// "RoomNo": "P109",
+        /// "RoomName": "string",
+        ///"NoP": "9",
+        ///"Price": 9000000,
+        ///"Floor": 10,
+        ///"StatusStay": "string",
+        ///"Status": "Trống",
+        ///"TypeRoomID": "00000000-0000-0000-0000-000000000000"</param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/Room/create")]
-        public IHttpActionResult CreateRoom([FromBody]Room Room)
+        public IHttpActionResult CreateRoom([FromBody]Room room)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = roomBL.CreateRoom(Room);
+                response.data = roomBL.CreateRoom(room);
             }
             catch (Exception e)
             {

@@ -58,10 +58,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dictionary\BookRoomBL.cs" />
+    <Compile Include="Dictionary\CustomerBL.cs" />
+    <Compile Include="Dictionary\DeviceBL.cs" />
+    <Compile Include="Dictionary\EmployeeBL.cs" />
+    <Compile Include="Dictionary\EquipmentBL.cs" />
     <Compile Include="Dictionary\RoleBL.cs" />
     <Compile Include="Dictionary\RoomBL.cs" />
     <Compile Include="Dictionary\RoomTypeBL.cs" />
     <Compile Include="Dictionary\UserBL.cs" />
+    <Compile Include="IRepository\IBookRoomRepository.cs" />
+    <Compile Include="IRepository\ICustomerRepository.cs" />
+    <Compile Include="IRepository\IEmployeeRepository.cs" />
     <Compile Include="IRepository\IRoleRepository.cs" />
     <Compile Include="IRepository\IRoomRepository.cs" />
     <Compile Include="IRepository\IRoomTypeRepository.cs" />
