@@ -140,6 +140,34 @@ namespace QuanLyKhachSan.Controllers
         }
 
         /// <summary>
+        /// Tìm kiếm
+        /// </summary>
+        /// <param name="name">UserName</param>
+        /// <returns></returns>
+        [Route("api/User/search")]
+        //[Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IHttpActionResult Search(string name)
+        {
+            HttpResponseDTO<UserWithRoleViewModel> response = new HttpResponseDTO<UserWithRoleViewModel>();
+
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = userBL.SearchByName(name);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = null;
+            }
+            return Ok(response);
+        }
+
+
+        /// <summary>
         /// Thêm mới người dùng
         /// </summary>
         /// <param name="model">Truyền Role Name vào user</param>
