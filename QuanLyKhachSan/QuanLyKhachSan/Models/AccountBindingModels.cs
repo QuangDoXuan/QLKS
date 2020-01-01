@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
@@ -103,5 +104,22 @@ namespace QuanLyKhachSan.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class UpdateBindingModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+        [StringLength(100)]
+        public string UserName { get; set; }
+
+        [StringLength(10)]
+        public string PhoneNumber { get; set; }
+
+        //[StringLength(100)]
+        //public string RoleName { get; set; }
+
+
     }
 }

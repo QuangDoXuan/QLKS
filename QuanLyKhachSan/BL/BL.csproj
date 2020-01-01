@@ -59,12 +59,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dictionary\RoleBL.cs" />
+    <Compile Include="Dictionary\RoomBL.cs" />
+    <Compile Include="Dictionary\RoomTypeBL.cs" />
     <Compile Include="Dictionary\UserBL.cs" />
     <Compile Include="IRepository\IRoleRepository.cs" />
+    <Compile Include="IRepository\IRoomRepository.cs" />
+    <Compile Include="IRepository\IRoomTypeRepository.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{988ADAE9-37E9-4190-AEBC-CB5BD70C80FB}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{77f636c0-a8c7-4810-8d44-afd9dc2b2f9a}</Project>
       <Name>Entities</Name>

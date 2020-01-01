@@ -29,6 +29,7 @@ namespace QuanLyKhachSan.Controllers
         private UserBL userBL = new UserBL();
         private readonly IMapper _mapper;
         private ApplicationUserManager _userManager;
+        //private SignInManager<IdentityUser> _signInManager;
 
         public ApplicationUserManager UserManager
         {
@@ -83,6 +84,32 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
+
+        /// <summary>
+        /// Phân trang
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/User/page")]
+        //[Authorize(Rooms = "Moderator")]
+        [HttpGet]
+        public IHttpActionResult GetByPage(int pageNumber, int pageSize)
+        {
+            HttpResponseDTO<PagedResults<UserWithRoleViewModel>> response = new HttpResponseDTO<PagedResults<UserWithRoleViewModel>>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = userBL.CreatePagedResults(pageNumber, pageSize);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = null;
+            }
+            return Ok(response);
+        }
+
 
         /// <summary>
         /// Chi tiết người dùng
@@ -195,7 +222,7 @@ namespace QuanLyKhachSan.Controllers
         [Route("api/User/edit")]
         //[Authorize(Roles = "Admin")]
         [HttpPut]
-        public IHttpActionResult Edit([FromBody]Guid id, [FromBody]ApplicationUser user)
+        public async Task<IHttpActionResult> Edit([FromUri]Guid id, [FromBody]ApplicationUser user)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
@@ -203,6 +230,55 @@ namespace QuanLyKhachSan.Controllers
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
                 response.data = userBL.Update(id, user);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = 0;
+            }
+            return Ok(response);
+        }
+
+
+        /// <summary>
+        /// Cập nhật thông tin user
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/User/update")]
+        //[Authorize(Roles = "Admin")]
+        [HttpPut]
+        public async Task<IHttpActionResult> UpdateUser([FromUri] string Id, [FromBody] UpdateBindingModel model)
+        {
+            HttpResponseDTO<int> response = new HttpResponseDTO<int>();
+
+            try
+            {
+                var userNew = UserManager.FindById(Id);
+                if (userNew != null) {
+                    userNew.UserName = model.UserName;
+                    userNew.Email = model.Email;
+                    userNew.PhoneNumber = model.PhoneNumber;
+                }
+                var result = await UserManager.UpdateAsync(userNew);
+                //if (!User.IsInRole(model.RoleName))
+                //{
+                //    var result2 = await UserManager.RemoveFromRoleAsync(Id,User.Identity.Name);
+                //    var result3 = await UserManager.AddToRolesAsync(Id,)
+                //}
+                if (result.Succeeded)
+                {
+                    response.code = 0;
+                    response.message = Constanst.SUCCESS;
+                    response.data = 1;
+                }
+                else
+                {
+                    response.code = 1;
+                    response.message = Constanst.FAIL;
+                    response.data = 0;
+                }
+               
             }
             catch (Exception e)
             {
@@ -248,7 +324,7 @@ namespace QuanLyKhachSan.Controllers
         [Route("api/User/delete")]
         //[Authorize(Roles = "Admin")]
         [HttpDelete]
-        public IHttpActionResult DeleteUser ([FromBody]Guid id)
+        public IHttpActionResult DeleteUser ([FromUri]Guid id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
@@ -275,7 +351,7 @@ namespace QuanLyKhachSan.Controllers
         [Route("api/User/delete-users")]
         //[Authorize(Roles = "Admin")]
         [HttpDelete]
-        public IHttpActionResult DeleteUsers([FromBody]Guid[] id)
+        public IHttpActionResult DeleteUsers([FromUri]Guid[] id)
         {
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
@@ -292,6 +368,46 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
+
+        /// <summary>
+        /// Lấy danh sách tất cả người dùng và role của user
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/User/get-all")]
+        //[Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllUserWithRole()
+        {
+            HttpResponseDTO<IEnumerable<UserWithRoleViewModel>> response = new HttpResponseDTO<IEnumerable<UserWithRoleViewModel>>();
+
+            if (User.IsInRole("Admin"))
+            {
+                response.code = 4;
+                response.message = Constanst.USER_NOT_ALLOWED;
+                response.data = null;
+            }
+            else
+            {
+                await Task.Delay(500);
+                try
+                {
+                    response.code = 0;
+                    response.message = Constanst.SUCCESS;
+                    response.data = userBL.UsersWithRoles();
+                }
+                catch (Exception e)
+                {
+                    response.code = 500;
+                    response.message = Constanst.FAIL;
+                    response.data = null;
+                }
+            }
+
+           
+            return Ok(response);
+        }
+        
         #endregion
     }
 }

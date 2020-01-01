@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Common;
+using Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -52,7 +53,7 @@ namespace BL
         }
         public int DeleteFromRoles(Guid id, Guid roleId)
         {
-            ApplicationUser model = db.Users.Find(id);
+            ApplicationUser model = db.Users.SingleOrDefault(x => x.Id == id.ToString());
 
             if (model != null && roleId != null)
             {
@@ -111,5 +112,86 @@ namespace BL
             }
             return 0;
         }
+
+        public IEnumerable<UserWithRoleViewModel> UsersWithRoles()
+        {
+            var usersWithRoles = (from user in db.Users
+                                  select new
+                                  {
+                                      UserId = user.Id,
+                                      Username = user.UserName,
+                                      Email = user.Email,
+                                      RoleNames = (from userRole in user.Roles
+                                                   join role in db.Roles on userRole.RoleId
+                                                   equals role.Id
+                                                   select role).ToList(),
+                                      CreateDate = user.CreateDate,
+                                      EmailConfirmed = user.EmailConfirmed
+
+                                  }).ToList().Select(p => new UserWithRoleViewModel()
+
+                                  {
+                                      UserId = p.UserId,
+                                      UserName = p.Username,
+                                      Email = p.Email,
+                                      //Role = string.Join(",", p.RoleNames),
+                                      Roles = p.RoleNames,
+                                      CreateDate = p.CreateDate,
+                                      EmailConfirmed = p.EmailConfirmed
+                                  }) ;
+
+
+            return usersWithRoles;
+        }
+
+        public PagedResults<UserWithRoleViewModel> CreatePagedResults(int pageNumber, int pageSize)
+        {
+            var skipAmount = pageSize * pageNumber;
+
+            //var list = db.Rooms.OrderBy(t => t.RoomID).Skip(skipAmount).Take(pageSize);
+
+            var list = (from user in db.Users
+                                  select new
+                                  {
+                                      UserId = user.Id,
+                                      Username = user.UserName,
+                                      Email = user.Email,
+                                      RoleNames = (from userRole in user.Roles
+                                                   join role in db.Roles on userRole.RoleId
+                                                   equals role.Id
+                                                   select role).ToList(),
+                                      CreateDate = user.CreateDate,
+                                      EmailConfirmed = user.EmailConfirmed
+
+                                  }).ToList().Select(p => new UserWithRoleViewModel()
+
+                                  {
+                                      UserId = p.UserId,
+                                      UserName = p.Username,
+                                      Email = p.Email,
+                                      //Role = string.Join(",", p.RoleNames),
+                                      Roles = p.RoleNames,
+                                      CreateDate = p.CreateDate,
+                                      EmailConfirmed = p.EmailConfirmed
+                                  }).Skip(skipAmount).Take(pageSize);
+
+            var totalNumberOfRecords = list.Count();
+
+            var results = list.ToList();
+
+            var mod = totalNumberOfRecords % pageSize;
+
+            var totalPageCount = (totalNumberOfRecords / pageSize) + (mod == 0 ? 0 : 1);
+
+            return new PagedResults<UserWithRoleViewModel>
+            {
+                Results = results,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalNumberOfPages = totalPageCount,
+                TotalNumberOfRecords = totalNumberOfRecords
+            };
+        }
+
     }
 }

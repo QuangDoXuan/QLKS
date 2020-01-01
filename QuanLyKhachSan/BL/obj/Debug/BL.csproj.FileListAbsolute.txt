@@ -34,3 +34,5 @@ D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\BL\obj\Debug\BL.csprojAssemblyReference.ca
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\BL\obj\Debug\BL.csproj.CopyComplete
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\BL\obj\Debug\BL.dll
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\BL\obj\Debug\BL.pdb
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\BL\bin\Debug\Common.dll
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\BL\bin\Debug\Common.pdb

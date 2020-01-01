@@ -1,4 +1,4 @@
-namespace Entities.Repository
+namespace Entities
 {
     using System;
     using System.Collections.Generic;

@@ -76,6 +76,9 @@
     <Compile Include="Repository\Payment.cs" />
     <Compile Include="Repository\Room.cs" />
     <Compile Include="Repository\TypeRoom.cs" />
+    <Compile Include="ViewModel\RoomCreateViewModel.cs" />
+    <Compile Include="ViewModel\RoomTypeCreateViewModel.cs" />
+    <Compile Include="ViewModel\UserWithRoleViewModel.cs" />
     <Compile Include="ViewModel\RoleCreateViewModel.cs" />
     <Compile Include="ViewModel\UserCreateViewModel.cs" />
   </ItemGroup>
