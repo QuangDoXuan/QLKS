@@ -19,6 +19,7 @@ namespace Entities
 
         [StringLength(10)]
         public string NoP { get; set; }
+        public int? NumPerson { get; set; }
 
         public decimal? Price { get; set; }
 

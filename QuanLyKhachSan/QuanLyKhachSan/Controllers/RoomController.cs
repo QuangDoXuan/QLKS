@@ -63,7 +63,7 @@ namespace QuanLyKhachSan.Controllers
         [Route("api/Room/search")]
         //[Authorize(Rooms = "Moderator")]
         [HttpGet]
-        public IHttpActionResult Search(string searchTerm, string sortColumn, string sortOrder, int pageNumber, int pageSize, string roomNo, string roomTypeId, string status, string statusStay,string nop)
+        public IHttpActionResult Search(string searchTerm, string sortColumn, string sortOrder, int pageNumber, int pageSize, string roomNo, string roomTypeId, string status, string statusStay,int nop)
         {
             HttpResponseDTO<IEnumerable<RoomSearchViewModel>> response = new HttpResponseDTO<IEnumerable<RoomSearchViewModel>>();
             try
