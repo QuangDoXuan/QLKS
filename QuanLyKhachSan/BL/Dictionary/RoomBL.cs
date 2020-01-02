@@ -41,15 +41,23 @@ namespace BL
             return 0;
         }
         
-        public IEnumerable<RoomSearchViewModel> Search(string roomNo, string roomTypeId, string status, string statusStay)
+        public IEnumerable<RoomSearchViewModel> Search(string searchTerm,string sortColumn, string sortOrder, int pageNumber, int pageSize, string roomNo, string roomTypeId, string status, string statusStay,string nop)
         {
 
-            SqlParameter param1 = new SqlParameter("@roomTypeId", (object)roomTypeId ?? DBNull.Value);
-            SqlParameter param2 = new SqlParameter("@roomNo", (object)roomNo ?? DBNull.Value);
-            SqlParameter param3 = new SqlParameter("@status", (object)status ?? DBNull.Value);
-            SqlParameter param4 = new SqlParameter("@statusStay", (object)statusStay ?? DBNull.Value);
+
+            SqlParameter param1 = new SqlParameter("@SearchTerm", (object)searchTerm ?? DBNull.Value);
+            SqlParameter param2 = new SqlParameter("@SortColumn", (object)sortColumn ?? DBNull.Value);
+            SqlParameter param3 = new SqlParameter("@SortOrder", (object)sortOrder ?? DBNull.Value);
+            SqlParameter param4 = new SqlParameter("@PageNumber", (object)pageNumber ?? DBNull.Value);
+
+            SqlParameter param5 = new SqlParameter("@PageSize", (object)pageSize ?? DBNull.Value);
+            SqlParameter param6 = new SqlParameter("@roomNo", (object)roomNo ?? DBNull.Value);
+            SqlParameter param7 = new SqlParameter("@roomTypeId", (object)roomTypeId ?? DBNull.Value);
+            SqlParameter param8 = new SqlParameter("@status", (object)status ?? DBNull.Value);
+            SqlParameter param9 = new SqlParameter("@statusStay", (object)statusStay ?? DBNull.Value);
+            SqlParameter param10 = new SqlParameter("@nop", (object)nop ?? DBNull.Value);
             //var lstPost = db.Database.SqlQuery<Post>("Search @id, @name, @req, @fromDate, @toDate", param1, param2, param3, param4, param5);
-            var lstRoom = db.Database.SqlQuery<RoomSearchViewModel>("searchRoom @roomNo, @roomTypeId, @status, @statusStay", param1, param2, param3, param4);
+            var lstRoom = db.Database.SqlQuery<RoomSearchViewModel>("SearchAndPaging @SearchTerm, @SortColumn, @SortOrder, @PageNumber, @PageSize,  @roomNo, @roomTypeId, @status, @statusStay,@nop",param1,param2,param3,param4,param5, param6, param7, param8, param9,param10);
             return lstRoom;
         }
 

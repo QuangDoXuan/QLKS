@@ -63,14 +63,14 @@ namespace QuanLyKhachSan.Controllers
         [Route("api/Room/search")]
         //[Authorize(Rooms = "Moderator")]
         [HttpGet]
-        public IHttpActionResult Search(string roomNo, string roomTypeId, string status, string statusStay)
+        public IHttpActionResult Search(string searchTerm, string sortColumn, string sortOrder, int pageNumber, int pageSize, string roomNo, string roomTypeId, string status, string statusStay,string nop)
         {
             HttpResponseDTO<IEnumerable<RoomSearchViewModel>> response = new HttpResponseDTO<IEnumerable<RoomSearchViewModel>>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = roomBL.Search(roomNo,roomTypeId,status,statusStay);
+                response.data = roomBL.Search(searchTerm, sortColumn,sortOrder, pageNumber,pageSize, roomNo,roomTypeId,status,statusStay,nop);
             }
             catch (Exception e)
             {
