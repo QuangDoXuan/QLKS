@@ -3,6 +3,7 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace BL
         public IEnumerable<Room> GetAll()
         {
             return db.Rooms.ToList();
+        }
+
+        public IEnumerable<Room> GetRoomEmpty()
+        {
+            return db.Rooms.Where(x=>x.Status=="Trống");
         }
         public Room GetDetail(Guid id)
         {
@@ -33,6 +39,18 @@ namespace BL
                 return 1;
             }
             return 0;
+        }
+        
+        public IEnumerable<RoomSearchViewModel> Search(string roomNo, string roomTypeId, string status, string statusStay)
+        {
+
+            SqlParameter param1 = new SqlParameter("@roomTypeId", (object)roomTypeId ?? DBNull.Value);
+            SqlParameter param2 = new SqlParameter("@roomNo", (object)roomNo ?? DBNull.Value);
+            SqlParameter param3 = new SqlParameter("@status", (object)status ?? DBNull.Value);
+            SqlParameter param4 = new SqlParameter("@statusStay", (object)statusStay ?? DBNull.Value);
+            //var lstPost = db.Database.SqlQuery<Post>("Search @id, @name, @req, @fromDate, @toDate", param1, param2, param3, param4, param5);
+            var lstRoom = db.Database.SqlQuery<RoomSearchViewModel>("searchRoom @roomNo, @roomTypeId, @status, @statusStay", param1, param2, param3, param4);
+            return lstRoom;
         }
 
         public int Update(Guid id,Room room)

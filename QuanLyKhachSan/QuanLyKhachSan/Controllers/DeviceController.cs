@@ -176,5 +176,31 @@ namespace QuanLyKhachSan.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Cập nhật thiết bị
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("api/Room/update")]
+        public IHttpActionResult Update(Guid id, [FromBody]Device device)
+        {
+            HttpResponseDTO<int> response = new HttpResponseDTO<int>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = deviceBL.Update(id, device);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = 0;
+            }
+            return Ok(response);
+        }
+
     }
 }

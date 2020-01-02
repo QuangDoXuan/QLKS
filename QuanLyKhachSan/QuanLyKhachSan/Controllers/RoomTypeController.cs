@@ -166,5 +166,31 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
+
+        /// <summary>
+        /// Sửa thông tin loại phòng
+        /// </summary>
+        /// <param name="id">TypeRoomId</param>
+        /// <param name="room">newTypeRoom</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("api/RoomType/update")]
+        public IHttpActionResult Update(Guid id, [FromBody]TypeRoom room)
+        {
+            HttpResponseDTO<int> response = new HttpResponseDTO<int>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = typeRoomBL.Update(id, room);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = 0;
+            }
+            return Ok(response);
+        }
     }
 }

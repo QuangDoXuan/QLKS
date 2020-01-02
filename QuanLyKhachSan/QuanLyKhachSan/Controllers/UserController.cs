@@ -149,7 +149,7 @@ namespace QuanLyKhachSan.Controllers
         [HttpGet]
         public IHttpActionResult Search(string name)
         {
-            HttpResponseDTO<UserWithRoleViewModel> response = new HttpResponseDTO<UserWithRoleViewModel>();
+            HttpResponseDTO<IEnumerable<UserWithRoleViewModel>> response = new HttpResponseDTO<IEnumerable<UserWithRoleViewModel>>();
 
             try
             {

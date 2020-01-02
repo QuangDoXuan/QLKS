@@ -78,6 +78,32 @@ namespace QuanLyKhachSan.Controllers
 
 
         /// <summary>
+        /// Tìm kiếm
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Customer/search")]
+        //[Authorize(Customers = "Moderator")]
+        [HttpGet]
+        public IHttpActionResult Search(string customerName, string customerNo, string nation, string identityCard, bool? gender, DateTime? dob, string phone, string email)
+        {
+            HttpResponseDTO<IEnumerable<CustomerViewModel>> response = new HttpResponseDTO<IEnumerable<CustomerViewModel>>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = customerBL.Search(customerName, customerNo,nation,identityCard,gender,dob,phone,email);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = null;
+            }
+            return Ok(response);
+        }
+
+
+        /// <summary>
         /// Chi tiết Customer
         /// </summary>
         /// <param name="id"></param>

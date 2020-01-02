@@ -74,6 +74,10 @@
     <Compile Include="Migrations\202001010622148_update_booking.Designer.cs">
       <DependentUpon>202001010622148_update_booking.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001020730184_add_Dob_customer.cs" />
+    <Compile Include="Migrations\202001020730184_add_Dob_customer.Designer.cs">
+      <DependentUpon>202001020730184_add_Dob_customer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BookRoom.cs" />
@@ -86,7 +90,9 @@
     <Compile Include="Repository\Room.cs" />
     <Compile Include="Repository\TypeRoom.cs" />
     <Compile Include="ViewModel\BookRoomCreateViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\RoomCreateViewModel.cs" />
+    <Compile Include="ViewModel\RoomSearchViewModel.cs" />
     <Compile Include="ViewModel\RoomTypeCreateViewModel.cs" />
     <Compile Include="ViewModel\UserWithRoleViewModel.cs" />
     <Compile Include="ViewModel\RoleCreateViewModel.cs" />
@@ -108,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001010622148_update_booking.resx">
       <DependentUpon>202001010622148_update_booking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001020730184_add_Dob_customer.resx">
+      <DependentUpon>202001020730184_add_Dob_customer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

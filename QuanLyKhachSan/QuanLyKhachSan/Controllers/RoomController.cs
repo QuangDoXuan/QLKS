@@ -55,6 +55,32 @@ namespace QuanLyKhachSan.Controllers
             return Ok(response);
         }
 
+
+        /// <summary>
+        /// Tìm kiếm Room
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Room/search")]
+        //[Authorize(Rooms = "Moderator")]
+        [HttpGet]
+        public IHttpActionResult Search(string roomNo, string roomTypeId, string status, string statusStay)
+        {
+            HttpResponseDTO<IEnumerable<RoomSearchViewModel>> response = new HttpResponseDTO<IEnumerable<RoomSearchViewModel>>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = roomBL.Search(roomNo,roomTypeId,status,statusStay);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = null;
+            }
+            return Ok(response);
+        }
+
         /// <summary>
         /// Phân trang
         /// </summary>
@@ -188,6 +214,31 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
-
+   
+        /// <summary>
+        /// Sửa thông tin room
+        /// </summary>
+        /// <param name="id">RoomId</param>
+        /// <param name="room">newRoom</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("api/Room/update")]
+        public IHttpActionResult Update(Guid id, [FromBody]Room room)
+        {
+            HttpResponseDTO<int> response = new HttpResponseDTO<int>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = roomBL.Update(id,room);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = 0;
+            }
+            return Ok(response);
+        }
     }
 }

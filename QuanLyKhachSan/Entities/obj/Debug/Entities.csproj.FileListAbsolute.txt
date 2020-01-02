@@ -35,3 +35,4 @@ D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.csprojAssembly
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.updatetableuser.resources
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.change_book_room.resources
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.update_booking.resources
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.add_Dob_customer.resources

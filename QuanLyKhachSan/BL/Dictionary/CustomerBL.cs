@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,21 @@ namespace BL
         {
             return db.Customers.FirstOrDefault(x => x.CustomerID == id);
         }
+        public IEnumerable<CustomerViewModel> Search(string customerName, string customerNo, string nation, string identityCard, bool? gender, DateTime? dob, string phone, string email)
+        {
+            SqlParameter param1 = new SqlParameter("@customerName", (object)customerName ?? DBNull.Value);
+            SqlParameter param2 = new SqlParameter("@customerNo", (object)customerNo ?? DBNull.Value);
+            SqlParameter param3 = new SqlParameter("@nation", (object)nation ?? DBNull.Value);
+            SqlParameter param4 = new SqlParameter("@identityCard", (object)identityCard ?? DBNull.Value);
+            SqlParameter param5 = new SqlParameter("@gender", (object)gender ?? DBNull.Value);
+            SqlParameter param6 = new SqlParameter("@dob", (object)dob ?? DBNull.Value);
+            SqlParameter param7 = new SqlParameter("@phone", (object)phone ?? DBNull.Value);
+            SqlParameter param8 = new SqlParameter("@email", (object)email ?? DBNull.Value);
+
+            var lstCustomer = db.Database.SqlQuery<CustomerViewModel>("SearchCustomer @customerName, @customerNo, @nation, @identityCard ,@gender,@dob,@phone,@email ", param1, param2, param3, param4, param5,param6,param7,param8);
+            return lstCustomer;
+        }
+
         public int Create(Customer customer)
         {
 
