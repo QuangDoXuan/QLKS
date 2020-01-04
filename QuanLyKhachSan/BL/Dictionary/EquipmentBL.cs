@@ -6,16 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL.Dictionary
+namespace BL
 {
     public class EquipmentBL
     {
         private HotelManageDbContext db = new HotelManageDbContext();
 
         //private readonly DbSet<T> _dbSet;
-        public IEnumerable<Equipment> GetAll()
+        public IEnumerable<EquipmentViewModel> GetAll()
         {
-            return db.Equipments.ToList();
+            var lstEquip = from e in db.Equipments
+                           join r in db.Rooms on e.RoomID equals r.RoomID
+                           join d in db.Devices on e.DeviceID equals d.DeviceID
+                           select new EquipmentViewModel()
+                           {
+                               Room = r,
+                               Device = d,
+                               Quantity = e.Quantity
+
+                           } ;
+            return lstEquip;
         }
         //public Equipment GetDetail(Guid id)
         //{

@@ -82,6 +82,10 @@
     <Compile Include="Migrations\202001021029381_update_NOP.Designer.cs">
       <DependentUpon>202001021029381_update_NOP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001040406596_add_createDate.cs" />
+    <Compile Include="Migrations\202001040406596_add_createDate.Designer.cs">
+      <DependentUpon>202001040406596_add_createDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BookRoom.cs" />
@@ -94,7 +98,10 @@
     <Compile Include="Repository\Room.cs" />
     <Compile Include="Repository\TypeRoom.cs" />
     <Compile Include="ViewModel\BookRoomCreateViewModel.cs" />
+    <Compile Include="ViewModel\BookRoomViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\EquipmentViewModel.cs" />
+    <Compile Include="ViewModel\PaymentSearchViewModel.cs" />
     <Compile Include="ViewModel\RoomCreateViewModel.cs" />
     <Compile Include="ViewModel\RoomSearchViewModel.cs" />
     <Compile Include="ViewModel\RoomTypeCreateViewModel.cs" />
@@ -124,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001021029381_update_NOP.resx">
       <DependentUpon>202001021029381_update_NOP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001040406596_add_createDate.resx">
+      <DependentUpon>202001040406596_add_createDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

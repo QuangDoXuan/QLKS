@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace QuanLyKhachSan.Controllers
@@ -67,6 +68,35 @@ namespace QuanLyKhachSan.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Tìm kiếm
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="customerId"></param>
+        /// <param name="bookNo"></param>
+        /// <returns></returns>
+        [Route("api/BookRoom/search")]
+        //[Authorize(Rooms = "Moderator")]
+        [HttpGet]
+        public IHttpActionResult Search(int pageNumber, int pageSize, Guid? customerId, string bookNo)
+        {
+            HttpResponseDTO<PagedResults<BookRoomViewModel>> response = new HttpResponseDTO<PagedResults<BookRoomViewModel>>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = bookRoomBL.Search(pageNumber, pageSize,customerId,bookNo);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = null;
+            }
+            return Ok(response);
+        }
+
 
         /// <summary>
         /// Chi tiết book
@@ -96,13 +126,12 @@ namespace QuanLyKhachSan.Controllers
        /// Tạo mới đặt phòng
        /// </summary>
        /// <param name="bookRoom"></param>
-       /// <param name="roomID"></param>
        /// <returns></returns>
         [HttpPost]
         [Route("api/BookRoom/create")]
         public IHttpActionResult Create([FromBody]BookRoom bookRoom)
         {
-            HttpResponseDTO<int> response = new HttpResponseDTO<int>();
+            HttpResponseDTO<string> response = new HttpResponseDTO<string>();
             try
             {
                 response.code = 0;
@@ -113,11 +142,16 @@ namespace QuanLyKhachSan.Controllers
             {
                 response.code = 500;
                 response.message = Constanst.FAIL;
-                response.data = 0;
+                response.data = null;
             }
             return Ok(response);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">bookroomID</param>
+        /// <param name="roomID">List roomId</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/BookRoom/create-detail")]
         public IHttpActionResult CreateDetail(Guid id,[FromBody]Guid[]roomID)
@@ -187,5 +221,34 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
+
+        /// <summary>
+        /// Lấy danh sách tất cả người dùng và role của user
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/BookRoom/get-all")]
+        //[Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllBookRooms(int pageNumber, int pageSize)
+        {
+            HttpResponseDTO<PagedResults<BookRoomViewModel>> response = new HttpResponseDTO<PagedResults<BookRoomViewModel>>();
+            
+                await Task.Delay(500);
+                try
+                {
+                    response.code = 0;
+                    response.message = Constanst.SUCCESS;
+                    response.data = bookRoomBL.GetAllBookRooms(pageNumber, pageSize);
+                }
+                catch (Exception e)
+                {
+                    response.code = 500;
+                    response.message = Constanst.FAIL;
+                    response.data = null;
+                }
+            return Ok(response);
+        }
+
     }
 }

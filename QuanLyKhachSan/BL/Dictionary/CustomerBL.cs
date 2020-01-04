@@ -40,14 +40,24 @@ namespace BL
         public int Create(Customer customer)
         {
 
-            if (customer != null)
+
+            if (db.Customers.FirstOrDefault(x => x.IdentityCard == customer.IdentityCard) != null)
+            { 
+               return 2;
+            }
+            if (db.Customers.FirstOrDefault(x=>x.CustomerNo == customer.CustomerNo) != null)
+            {
+                return 3;
+            }
+            if(customer != null)
             {
                 customer.CustomerID = Guid.NewGuid();
+                customer.CreateDate = DateTime.Now;
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return 1;
+                return 0;
             }
-            return 0;
+            return 1;
         }
 
         public int Update(Guid id, Customer customer)

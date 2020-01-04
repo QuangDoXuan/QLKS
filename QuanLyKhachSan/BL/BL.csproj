@@ -59,10 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dictionary\BookRoomBL.cs" />
+    <Compile Include="Dictionary\BookRoomDetailBL.cs" />
     <Compile Include="Dictionary\CustomerBL.cs" />
     <Compile Include="Dictionary\DeviceBL.cs" />
     <Compile Include="Dictionary\EmployeeBL.cs" />
     <Compile Include="Dictionary\EquipmentBL.cs" />
+    <Compile Include="Dictionary\PayBL.cs" />
     <Compile Include="Dictionary\RoleBL.cs" />
     <Compile Include="Dictionary\RoomBL.cs" />
     <Compile Include="Dictionary\RoomTypeBL.cs" />

@@ -34,5 +34,7 @@ namespace Entities
 
         [StringLength(100)]
         public string Nationality { get; set; }
+
+        public DateTime? CreateDate { get; set; }
     }
 }

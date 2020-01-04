@@ -139,9 +139,26 @@ namespace QuanLyKhachSan.Controllers
             HttpResponseDTO<int> response = new HttpResponseDTO<int>();
             try
             {
-                response.code = 0;
-                response.message = Constanst.SUCCESS;
-                response.data = customerBL.Create(customer);
+                    response.data = customerBL.Create(customer);
+                switch (response.data)
+                {
+                    case 0:
+                        response.code = 0;
+                        response.message = Constanst.SUCCESS;
+                        break;
+                    case 1:
+                        response.code = 1;
+                        response.message = Constanst.FAIL;
+                        break;
+                    case 2:
+                        response.code = 2;
+                        response.message = "CMND/CCCD đã tồn tại!";
+                        break;
+                    case 3:
+                        response.code = 3;
+                        response.message = "Mã KH đã tồn tại";
+                        break;
+                }             
             }
             catch (Exception e)
             {
@@ -201,6 +218,28 @@ namespace QuanLyKhachSan.Controllers
             }
             return Ok(response);
         }
-
+        /// <summary>
+        /// Sửa thông tin khách hàng
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        public IHttpActionResult Update(Guid id, [FromBody]Customer customer)
+        {
+            HttpResponseDTO<int> response = new HttpResponseDTO<int>();
+            try
+            {
+                response.code = 0;
+                response.message = Constanst.SUCCESS;
+                response.data = customerBL.Update(id, customer);
+            }
+            catch (Exception e)
+            {
+                response.code = 500;
+                response.message = Constanst.FAIL;
+                response.data = 0;
+            }
+            return Ok(response);
+        }
     }
 }

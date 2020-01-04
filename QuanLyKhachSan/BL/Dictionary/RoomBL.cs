@@ -41,7 +41,7 @@ namespace BL
             return 0;
         }
         
-        public IEnumerable<RoomSearchViewModel> Search(string searchTerm,string sortColumn, string sortOrder, int pageNumber, int pageSize, string roomNo, string roomTypeId, string status, string statusStay,int nop)
+        public IEnumerable<RoomSearchViewModel> Search(string searchTerm,string sortColumn, string sortOrder, int pageNumber, int pageSize, string roomNo, string roomTypeId, string status, string statusStay,int? nop)
         {
 
 

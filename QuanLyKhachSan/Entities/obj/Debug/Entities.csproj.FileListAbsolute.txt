@@ -37,3 +37,4 @@ D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.cha
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.update_booking.resources
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.add_Dob_customer.resources
 D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.update_NOP.resources
+D:\QuanLyKhachSan\QLKS\QuanLyKhachSan\Entities\obj\Debug\Entities.Migrations.add_createDate.resources
