@@ -27,9 +27,22 @@ namespace BL
 
             if (payment != null)
             {
+                var book = db.BookRooms.FirstOrDefault(x => x.BookRoomID == payment.BookRoomID);
+                var lstRoomRemake = (from b in db.BookRooms
+                                     join d in db.BookRoomDetails on b.BookRoomID equals d.BookRoomID
+                                     join r in db.Rooms on d.RoomID equals r.RoomID
+                                     select r).ToList();
+                foreach(var item in lstRoomRemake)
+                {
+                    var room = db.Rooms.SingleOrDefault(x => x.RoomID == item.RoomID);
+                    room.StatusStay = "Trống";
+                }
+                db.SaveChanges();
                 payment.PaymentID = Guid.NewGuid();
                 payment.Date = DateTime.Now;
                 db.Payments.Add(payment);
+                db.SaveChanges();
+                book.Status = true;
                 db.SaveChanges();
                 return 1;
             }

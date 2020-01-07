@@ -37,6 +37,13 @@ namespace BL
             return lstCustomer;
         }
 
+
+        //public object Statistic()
+        //{
+        //    var keys = new List<int>();
+        //    var values = new List<int>();
+        //    //var totalBook = db.Customers.
+        //}
         public int Create(Customer customer)
         {
 

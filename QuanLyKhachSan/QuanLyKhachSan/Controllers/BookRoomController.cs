@@ -75,18 +75,20 @@ namespace QuanLyKhachSan.Controllers
         /// <param name="pageSize"></param>
         /// <param name="customerId"></param>
         /// <param name="bookNo"></param>
+        /// <param name="customerCode"></param>
+        /// <param name="identity"></param>
         /// <returns></returns>
         [Route("api/BookRoom/search")]
         //[Authorize(Rooms = "Moderator")]
         [HttpGet]
-        public IHttpActionResult Search(int pageNumber, int pageSize, Guid? customerId, string bookNo)
+        public IHttpActionResult Search(int pageNumber, int pageSize, Guid? customerId, string bookNo, string customerCode, string identity)
         {
             HttpResponseDTO<PagedResults<BookRoomViewModel>> response = new HttpResponseDTO<PagedResults<BookRoomViewModel>>();
             try
             {
                 response.code = 0;
                 response.message = Constanst.SUCCESS;
-                response.data = bookRoomBL.Search(pageNumber, pageSize,customerId,bookNo);
+                response.data = bookRoomBL.Search(pageNumber, pageSize,customerId,bookNo,customerCode,identity);
             }
             catch (Exception e)
             {

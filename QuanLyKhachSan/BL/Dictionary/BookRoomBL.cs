@@ -40,6 +40,8 @@ namespace BL
             {
                 foreach (var item in roomID)
                 {
+                    var roomB = db.Rooms.FirstOrDefault(x => x.RoomID == item);
+                    roomB.StatusStay = "Đang sử dụng";
                     BookRoomDetail newBookDetail = new BookRoomDetail(id, item);
                     db.BookRoomDetails.Add(newBookDetail);
                     db.SaveChanges();
@@ -103,6 +105,7 @@ namespace BL
                 foreach (var item in id)
                 {
                     var roomDeleted = db.Rooms.FirstOrDefault(x => x.RoomID == item);
+                    
                     db.Rooms.Remove(roomDeleted);
                 }
                 db.SaveChanges();
@@ -110,6 +113,7 @@ namespace BL
             }
             return 0;
         }
+
 
         public PagedResults<BookRoom> CreatePagedResults(int pageNumber, int pageSize)
         {
@@ -136,13 +140,15 @@ namespace BL
         }
 
 
-        public PagedResults<BookRoomViewModel> Search(int pageNumber, int pageSize, Guid? customerId, string bookNo)
+        public PagedResults<BookRoomViewModel> Search(int pageNumber, int pageSize, Guid? customerId, string bookNo, string customerCode, string identity)
         {
             var skipAmount = pageSize * pageNumber;
             var list = (from bookRoom in db.BookRooms 
                         join c in db.Customers on bookRoom.CustomerID equals c.CustomerID
                         where (bookNo != null ? bookRoom.BookRoomNo.Contains(bookNo) : true)
                         && (customerId != null ? c.CustomerID == customerId : true)
+                         && (customerCode != null ? c.CustomerNo == customerCode : true)
+                          && (identity != null ? c.IdentityCard == identity : true)
                         select new
                         {
                             BookRoomId = bookRoom.BookRoomID,

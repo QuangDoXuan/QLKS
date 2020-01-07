@@ -102,6 +102,7 @@
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\PaymentSearchViewModel.cs" />
+    <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="ViewModel\RoomCreateViewModel.cs" />
     <Compile Include="ViewModel\RoomSearchViewModel.cs" />
     <Compile Include="ViewModel\RoomTypeCreateViewModel.cs" />
